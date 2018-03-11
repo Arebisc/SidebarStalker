@@ -2,7 +2,7 @@
   <div class="main_page__wrapper">
       <h1>This is main page</h1>
       <p>{{ getCounterValue }}</p>
-      <button @click="callIncrementCounter">Increment</button>
+      <el-button @click="callIncrementCounter">Increment</el-button>
   </div>
 </template>
 
