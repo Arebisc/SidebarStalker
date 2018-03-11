@@ -5,7 +5,6 @@ const Devices = smartcard.Devices;
 const Iso7816Application = smartcard.Iso7816Application;
 
 var fs = require('fs');
-var Ber = require('asn1').Ber;
 
 const devices = new Devices();
 
