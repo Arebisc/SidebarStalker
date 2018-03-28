@@ -1,30 +1,35 @@
 <template>
     <el-container>
-        <el-aside width="200px">Aside</el-aside>
+        <el-aside width="200px">
+            <aside-container></aside-container>
+        </el-aside>
         <el-container>
-            <el-header>Header</el-header>
-            <el-main>Main</el-main>
+            <el-header>
+                <header-container></header-container>
+            </el-header>
+            <el-main>
+                <main-container></main-container>
+            </el-main>
         </el-container>
     </el-container>
 </template>
 
 <script>
-export default {
-  data() {
-      return {
+import MainContainer from '@/components/MainContainer/MainContainer';
+import AsideContainer from '@/components/AsideContainer/AsideContainer';
+import HeaderContainer from '@/components/HeaderContainer/HeaderContainer';
 
-      }
-  },
-  methods: {
-      callIncrementCounter() {
-          this.$store.dispatch('incrementCounter', 1);
-      }
-  },
-  computed: {
-      getCounterValue() {
-          return this.$store.getters.counter;
-      }
-  }
+export default {
+    components: {
+        'main-container': MainContainer,
+        'aside-container': AsideContainer,
+        'header-container': HeaderContainer
+    },
+    data() {
+        return {
+
+        }
+    }
 }
 </script>
 
