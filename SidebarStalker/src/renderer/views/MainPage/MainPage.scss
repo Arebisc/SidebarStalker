@@ -1,3 +1,10 @@
 body {
     font-family: 'Lato';
+
+    &::after {
+        background-image: url('~@/assets/images/Check-List.jpg');
+        background-repeat: no-repeat, repeat;
+        background-size: cover;
+        // opacity: 0.5;
+    }
 }
