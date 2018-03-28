@@ -1,9 +1,11 @@
 <template>
-  <div class="main_page__wrapper">
-      <h1>This is main page</h1>
-      <p>{{ getCounterValue }}</p>
-      <el-button @click="callIncrementCounter">Increment</el-button>
-  </div>
+    <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-container>
+            <el-header>Header</el-header>
+            <el-main>Main</el-main>
+        </el-container>
+    </el-container>
 </template>
 
 <script>
