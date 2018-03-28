@@ -8,7 +8,6 @@
                 <header-container></header-container>
             </el-header>
             <el-main>
-                <el-button @click="toastNotify">Notify</el-button>
                 <main-container></main-container>
             </el-main>
         </el-container>
@@ -32,14 +31,7 @@ export default {
         }
     },
     methods: {
-        toastNotify() {
-            this.$notify({
-                group: 'global',
-                title: 'some title',
-                text: 'Hello world!',
-                type: 'success'
-            });
-        }
+        
     }
 }
 </script>
