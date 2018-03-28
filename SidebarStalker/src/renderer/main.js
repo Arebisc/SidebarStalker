@@ -14,7 +14,7 @@ Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
-Vue.use(Notification);
+Vue.use(Notifications);
 
 /* eslint-disable no-new */
 new Vue({
