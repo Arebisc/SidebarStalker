@@ -1,10 +1,10 @@
 <template>
-    <el-container>
-        <el-aside style="width: 25%">
+    <el-container id="mainpage__wrapper">
+        <el-aside style="width: 20%" id="asidecontainer__wrapper">
             <aside-container></aside-container>
         </el-aside>
         <el-container>
-            <el-header>
+            <el-header id="app-header__wrapper">
                 <header-container></header-container>
             </el-header>
             <el-main>

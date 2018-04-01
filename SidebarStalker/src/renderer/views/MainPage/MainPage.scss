@@ -1,11 +1,16 @@
-body {
-    font-family: 'Lato';
-    margin: 0;
+#mainpage__wrapper {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0; 
+}
 
-    &::after {
-        background-image: url('~@/assets/images/Check-List.jpg');
-        background-repeat: no-repeat, repeat;
-        background-size: cover;
-        // opacity: 0.5;
-    }
+#asidecontainer__wrapper {
+    background: #4e86e0;
+    opacity: 0.8;
+}
+
+#app-header__wrapper {
+    background: #4e86e0;
 }

@@ -1,6 +1,6 @@
 <template>
     <h1>
-        HeaderContainer
+        Lista obecności
     </h1>
 </template>
 <script>
@@ -8,6 +8,6 @@ export default {
   
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import './HeaderContainer.scss';
 </style>
