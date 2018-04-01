@@ -1,6 +1,6 @@
 <template>
     <el-container>
-        <el-aside width="200px">
+        <el-aside style="width: 25%">
             <aside-container></aside-container>
         </el-aside>
         <el-container>
