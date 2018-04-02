@@ -4,7 +4,7 @@
             <aside-container></aside-container>
         </el-aside>
         <el-container>
-            <el-header id="app-header__wrapper">
+            <el-header id="app-header__wrapper" style="height: initial;">
                 <header-container></header-container>
             </el-header>
             <el-main>

@@ -7,4 +7,14 @@
         margin-top: 40px;
         margin-bottom: 20px;
     }
+
+    .app-link {
+        padding: 1px;
+    }
+
+    .app-link:hover {
+        border: 1px solid #5595fc;
+        color: #fff;
+        padding: 0px;
+    }
 }
