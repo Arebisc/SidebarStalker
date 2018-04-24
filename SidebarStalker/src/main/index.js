@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { Detect } from './../core/visionDetection/Count';
+import { execFile, fork } from 'child_process';
 
 /**
  * Set `__static` path to static files in production
@@ -29,6 +30,11 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  let pingingProcess = fork('C:\\Projects\\Politechnika\\Semestr VI\\SidebarStalker\\SidebarStalker\\src\\core\\cardReader\\ping');
+  pingingProcess.stdout.on('data', (data) => {
+    mainWindow.webContents.send('ping', data);
+  });
 }
 
 app.on('ready', createWindow)

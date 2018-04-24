@@ -49,6 +49,10 @@ export default {
       console.log('Number of people: ' + args);  
       self.numberOfPeople = args;
     });
+
+    ipcRenderer.on('ping', (data) => {
+      console.log(data);
+    });
   }
 }
 </script>
