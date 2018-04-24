@@ -18,15 +18,11 @@
           <el-menu-item index="2-1">Eksport</el-menu-item>
           <el-menu-item index="2-2">Import</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3" @click="sendPing">
-        <i class="el-icon-setting"></i>
-        <span>Ping</span>
-      </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="3">
         <i class="el-icon-setting"></i>
         <span>Wyjście</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="4" @click="countPeople">
         <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
       </el-menu-item>
     </el-menu>
@@ -42,19 +38,17 @@ export default {
     }
   },
   methods: {
-    sendPing() {
-      debugger;
-      ipcRenderer.send('ping', 1);
+    countPeople() {
+      ipcRenderer.send('detect-people-request');
     }
   },
   created() {
     let self = this;
 
     ipcRenderer.on('detect-people-response', (event, args) => {
-      console.log(args);  
+      console.log('Number of people: ' + args);  
       self.numberOfPeople = args;
     });
-    ipcRenderer.send('detect-people-request');
   }
 }
 </script>

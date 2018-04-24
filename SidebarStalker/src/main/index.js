@@ -47,7 +47,6 @@ app.on('activate', () => {
 
 ipcMain.on('detect-people-request', (event, arg) => {
   Detect().then((detectedPeople) => {
-    console.log(detectedPeople);
     event.sender.send('detect-people-response', detectedPeople);
   });
 });
