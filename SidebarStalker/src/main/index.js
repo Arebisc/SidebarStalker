@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { Detect } from './../core/visionDetection/Count';
 
 /**
  * Set `__static` path to static files in production
@@ -43,3 +44,10 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('detect-people-request', (event, arg) => {
+  Detect().then((detectedPeople) => {
+    console.log(detectedPeople);
+    event.sender.send('detect-people-response', detectedPeople);
+  });
+});

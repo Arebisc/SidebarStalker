@@ -18,19 +18,47 @@
           <el-menu-item index="2-1">Eksport</el-menu-item>
           <el-menu-item index="2-2">Import</el-menu-item>
       </el-submenu>
+      <el-menu-item index="3" @click="sendPing">
+        <i class="el-icon-setting"></i>
+        <span>Ping</span>
+      </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-setting"></i>
         <span>Wyjście</span>
       </el-menu-item>
+      <el-menu-item index="4">
+        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
+      </el-menu-item>
     </el-menu>
-  </el-col>
-</el-row>
 </template>
-<script>
-export default {
 
+<script>
+import { ipcRenderer } from 'electron';
+
+export default {
+  data() {
+    return {
+      numberOfPeople: 0
+    }
+  },
+  methods: {
+    sendPing() {
+      debugger;
+      ipcRenderer.send('ping', 1);
+    }
+  },
+  created() {
+    let self = this;
+
+    ipcRenderer.on('detect-people-response', (event, args) => {
+      console.log(args);  
+      self.numberOfPeople = args;
+    });
+    ipcRenderer.send('detect-people-request');
+  }
 }
 </script>
+
 <style lang="scss" scoped>
 @import './AsideContainer.scss';
 </style>

@@ -11,21 +11,15 @@ let options = {
     '--camera_Port=8080, ',
     '--camera_IP=192.168.1.13']
 };
-
-class PeopleDetection {
-  // constructor(options) {
-  //   this.options = options;
-  // }
-
-  Detect() {
+export function Detect() {
+  return new Promise((resolve, reject) => {
     let scriptFilename = 'C:\\Projects\\Politechnika\\Semestr VI\\SidebarStalker\\SidebarStalker\\src\\core\\visionDetection\\Detection.py';
 
     PythonShell.run(scriptFilename, options, function (err, results) {
-      if (err) throw err;
-      // results is an array consisting of messages collected during execution
-      console.log(results[0]);
-    });
-  }
-}
+      if (err)
+        reject(err);
 
-let peopleDetection = new PeopleDetection().Detect();
+      resolve(results[0]);
+    });
+  });
+}
