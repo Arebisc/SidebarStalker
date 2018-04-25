@@ -54,7 +54,7 @@ const baseProjectDirectory = process.cwd();
     });
   });
 console.log(baseProjectDirectory + '\\src\\core\\cardReader\\ping.js');
-var childPingingScript = exec(baseProjectDirectory + '\\src\\core\\cardReader\\ping.js');
+var childPingingScript = exec('node ' + baseProjectDirectory + '\\src\\core\\cardReader\\ping.js');
 childPingingScript.stdout.on('data',function(data){
     console.log('childProcess ' + data); // process output will be displayed here
 });
