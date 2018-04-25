@@ -1,5 +1,10 @@
 const PythonShell = require('python-shell');
+const path = require('path');
+
 const baseProjectDirectory = process.cwd();
+const visionDetectionDirectoryPath = path.join(baseProjectDirectory, 'src', 'core', 'visionDetection');
+const port = '8080';
+const ip = '192.168.1.13'
 
 let options = {
   //mode: 'text',
@@ -7,12 +12,11 @@ let options = {
  // pythonOptions: ['-u'],
  // scriptPath: 'path/to/my/scripts',
   args: [
-    '--model=' + baseProjectDirectory + '\\src\\core\\visionDetection\\MobileNetSSD_deploy.caffemodel',
-    '--prototxt=' + baseProjectDirectory + '\\src\\core\\visionDetection\\MobileNetSSD_deploy.prototxt',
-    '--camera_Port=8080, ',
-    '--camera_IP=192.168.43.1']
+    '--model=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.caffemodel'),
+    '--prototxt=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.prototxt'),
+    '--camera_Port=' + port + ', ',
+    '--camera_IP=' +  ip]
 };
-
 
 export function Detect() {
   return new Promise((resolve, reject) => {

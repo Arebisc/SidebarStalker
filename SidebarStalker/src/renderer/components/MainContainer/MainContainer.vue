@@ -21,6 +21,8 @@
     </div>
 </template>
 <script>
+import { ipcRenderer } from 'electron'
+
 export default {
     data() {
         return {
@@ -50,6 +52,15 @@ export default {
                 }
             ]
         }
+    },
+    created() {
+        ipcRenderer.on('pingCommunicate', (event, args) => {
+            this.$notify({
+                group: 'global',
+                title: 'Child process',
+                text: args.toString('utf8')
+            })
+        });
     }
 }
 </script>
