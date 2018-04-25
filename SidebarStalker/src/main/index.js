@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { Detect } from './../core/visionDetection/Count';
-import { exec } from 'child_process';
+import * as child_process from 'child_process';
+import path from 'path';
 
 const baseProjectDirectory = process.cwd();
 
@@ -53,11 +54,11 @@ const baseProjectDirectory = process.cwd();
       event.sender.send('detect-people-response', detectedPeople);
     });
   });
-console.log(baseProjectDirectory + '\\src\\core\\cardReader\\ping.js');
-var childPingingScript = exec('node ' + baseProjectDirectory + '\\src\\core\\cardReader\\ping.js');
+  
+let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'ping.js');
+console.log(pingingScriptPath);
+
+let childPingingScript = child_process.spawn('node', [pingingScriptPath]);
 childPingingScript.stdout.on('data',function(data){
     console.log('childProcess ' + data); // process output will be displayed here
 });
-  // childPingingScript.stderr.on('data',function(data){
-  //     console.log('childProcess error' + data); // process error output will be displayed here
-  // });
