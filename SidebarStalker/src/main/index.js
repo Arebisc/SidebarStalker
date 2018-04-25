@@ -2,6 +2,8 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import { Detect } from './../core/visionDetection/Count';
 import { execFile, fork } from 'child_process';
 
+const baseProjectDirectory = process.cwd();
+
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -31,7 +33,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  let pingingProcess = fork('C:\\Projects\\Politechnika\\Semestr VI\\SidebarStalker\\SidebarStalker\\src\\core\\cardReader\\ping');
+  let pingingProcess = execFile(baseProjectDirectory + '\\src\\core\\cardReader\\ping');
   pingingProcess.stdout.on('data', (data) => {
     mainWindow.webContents.send('ping', data);
   });
