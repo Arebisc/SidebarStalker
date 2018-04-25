@@ -1,4 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { Detect } from './../core/visionDetection/Count';
+import { execFile, fork } from 'child_process';
+
+const baseProjectDirectory = process.cwd();
 
 /**
  * Set `__static` path to static files in production
@@ -28,6 +32,11 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  let pingingProcess = execFile(baseProjectDirectory + '\\src\\core\\cardReader\\ping');
+  pingingProcess.stdout.on('data', (data) => {
+    mainWindow.webContents.send('ping', data);
+  });
 }
 
 app.on('ready', createWindow)
@@ -43,3 +52,9 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('detect-people-request', (event, arg) => {
+  Detect().then((detectedPeople) => {
+    event.sender.send('detect-people-response', detectedPeople);
+  });
+});
