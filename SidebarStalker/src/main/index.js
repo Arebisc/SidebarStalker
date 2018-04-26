@@ -55,10 +55,10 @@ ipcMain.on('detect-people-request', (event, arg) => {
   });
 });
   
-let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'ping.js');
-console.log(pingingScriptPath);
+let cardReaderScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'main.js');
+console.log(cardReaderScriptPath);
 
-let childPingingScript = child_process.spawn('node', [ pingingScriptPath ]);
+let childPingingScript = child_process.spawn('node', [ cardReaderScriptPath ]);
 childPingingScript.stdout.on('data', (data) => {
-  mainWindow.webContents.send('pingCommunicate', data);
+  mainWindow.webContents.send('cardReaderCommunication', data);
 });

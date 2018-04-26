@@ -54,12 +54,12 @@ export default {
         }
     },
     created() {
-        ipcRenderer.on('pingCommunicate', (event, args) => {
+        ipcRenderer.on('cardReaderCommunication', (event, args) => {
             this.$notify({
                 group: 'global',
-                title: 'Child process',
+                title: 'Nowa osoba:',
                 text: args.toString('utf8')
-            })
+            });
         });
     }
 }
