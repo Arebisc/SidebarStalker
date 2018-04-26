@@ -2,13 +2,14 @@
   "name": "cardreader",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "smartcard": "^1.0.22"
+    "smartcard": "^1.0.22",
+    "asn1js": "^2.0.19"
   }
 }
