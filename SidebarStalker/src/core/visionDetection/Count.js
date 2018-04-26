@@ -4,7 +4,7 @@ const path = require('path');
 const baseProjectDirectory = process.cwd();
 const visionDetectionDirectoryPath = path.join(baseProjectDirectory, 'src', 'core', 'visionDetection');
 const port = '8080';
-const ip = '192.168.1.13'
+const ip = '192.168.43.1'
 
 let options = {
   //mode: 'text',
@@ -14,7 +14,7 @@ let options = {
   args: [
     '--model=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.caffemodel'),
     '--prototxt=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.prototxt'),
-    '--camera_Port=' + port + ', ',
+    '--camera_Port=' + port ,
     '--camera_IP=' +  ip]
 };
 
