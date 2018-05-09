@@ -1,5 +1,8 @@
 <template>
     <div class="main-container__wrapper">
+        <el-button type="primary" @click="addStudentFormVisibility = true">
+            Dodaj studenta
+        </el-button>
         <el-table :data="tableData" style="width: 100%">
             <el-table-column
                 prop="date"
@@ -25,6 +28,27 @@
             name = "filename.xls">
             Exportuj xls
         </download-excel>
+        <download-excel
+            class = "btn btn-default"
+            :data = "tableData"
+            :fields = "tableFields"
+            type = "csv"
+            name = "filename.csv">
+            Exportuj csv
+        </download-excel>
+
+        <el-dialog
+            title="Dodaj studenta"
+            :visible.sync="addStudentFormVisibility"
+            width="30%"
+            :before-close="handleClose">
+            <span>This is a message</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="addStudentFormVisibility = false">Cancel</el-button>
+                <el-button type="primary" @click="addStudentFormVisibility = false">Confirm</el-button>
+            </span>
+        </el-dialog>
+
     </div>
 </template>
 <script>
@@ -79,6 +103,8 @@ export default {
                     }
                 ]
             ],
+
+            addStudentFormVisibility: false
         }
     },
     
@@ -94,6 +120,16 @@ export default {
         EventBus.$on('exportTableToXls', () => {
             console.log('exportTableToXls called');
         });
+    },
+
+    methods: {
+        handleClose(done) {
+            this.$confirm('Are you sure to close this dialog?')
+            .then(_ => {
+                done();
+            })
+            .catch(_ => {});
+        }
     }
 }
 </script>
