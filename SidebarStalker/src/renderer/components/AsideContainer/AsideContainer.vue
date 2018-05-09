@@ -15,47 +15,47 @@
           <i class="el-icon-menu"></i>
           <span>Ustawienia</span>
         </template>
-          <el-menu-item index="2-1">Eksport</el-menu-item>
+      <el-menu-item index="2-1">Eksport</el-menu-item>
       </el-submenu>
-      <el-menu-item index="4" @click="countPeople">
-        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
-      </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-setting"></i>
         <span>Wyjście</span>
+      </el-menu-item>
+      <el-menu-item index="4" @click="countPeople">
+        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
       </el-menu-item>
     </el-menu>
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
+import { ipcRenderer } from "electron";
 
 export default {
   data() {
     return {
       numberOfPeople: 0
-    }
+    };
   },
   methods: {
     countPeople() {
-      ipcRenderer.send('detect-people-request');
-    }
+      ipcRenderer.send("detect-people-request");
+    },
   },
   created() {
     let self = this;
 
-    ipcRenderer.on('detect-people-response', (event, args) => {
-      console.log('Number of people: ' + args);  
+    ipcRenderer.on("detect-people-response", (event, args) => {
+      console.log("Number of people: " + args);
       self.numberOfPeople = args;
     });
 
-    ipcRenderer.on('ping', (data) => {
+    ipcRenderer.on("ping", data => {
       console.log(data);
     });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './AsideContainer.scss';
+@import "./AsideContainer.scss";
 </style>
