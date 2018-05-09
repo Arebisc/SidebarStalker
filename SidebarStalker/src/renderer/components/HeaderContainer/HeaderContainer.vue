@@ -11,11 +11,13 @@
   <el-submenu index="2">
     <template slot="title">Eksport</template>
     <el-menu-item index="2-1">PDF</el-menu-item>
-    <el-menu-item index="2-2">XLS</el-menu-item>
+    <el-menu-item index="2-2" @click="triggerExport">XLS</el-menu-item>
   </el-submenu>
 </el-menu>
 </template>
 <script>
+import { EventBus } from '@/helpers/eventBusHelpers';
+
 export default {
      data() {
       return {
@@ -26,6 +28,11 @@ export default {
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+
+      
+      triggerExport() {
+        EventBus.$emit("exportTableToXls");
       }
     }
 }

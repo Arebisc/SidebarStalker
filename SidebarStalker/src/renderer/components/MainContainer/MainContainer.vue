@@ -21,7 +21,8 @@
     </div>
 </template>
 <script>
-import { ipcRenderer } from 'electron'
+import { ipcRenderer } from 'electron';
+import { EventBus } from '@/helpers/eventBusHelpers';
 
 export default {
     data() {
@@ -54,6 +55,7 @@ export default {
             ]
         }
     },
+    
     created() {
         ipcRenderer.on('pingCommunicate', (event, args) => {
             this.$notify({
@@ -61,6 +63,10 @@ export default {
                 title: 'Child process',
                 text: args.toString('utf8')
             })
+        });
+
+        EventBus.$on('exportTableToXls', () => {
+            console.log('exportTableToXls called');
         });
     }
 }
