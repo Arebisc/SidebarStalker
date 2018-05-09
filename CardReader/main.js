@@ -17,8 +17,7 @@ devices.on('device-activated', event => {
     device.on('card-inserted', event => {
 
         let card = event.card;
-        console.log(`Card '${card.getAtr()}' inserted into '${event.device}'` + '\n');
-
+        //console.log(`Card '${card.getAtr()}' inserted into '${event.device}'` + '\n');
         const application = new Iso7816Application(card);
 
         application.selectFile([0xD6, 0x16, 0x00, 0x00, 0x30, 0x01, 0x01])
@@ -43,6 +42,7 @@ devices.on('device-activated', event => {
                               var count = parseInt(response2.substring(2,4),16) - 128;
                               var length = "";
                               var k = 1;
+
                               for (k = 1; k <= count; k++) {
                                 length += response2.substring(2 + (k*2),4 + (k*2));
                               }
@@ -64,48 +64,43 @@ devices.on('device-activated', event => {
 
                         var kk = 0;
 
-                        for(var i = 0;i<(response2.length/2);i++){
-
+                        for (var i = 0; i < (response2.length / 2); i++){
                           bmp_string_view[i] = "0x" + response2.substring(kk,kk+2);
                           kk+=2;
-
                         }
 
                         let bmp_string_decoded = asn1js.fromBER(bmp_string_encoded);
 
-                        if(bmp_string_decoded.offset === (-1))
-                            return; // Error during decoding
+                        if (bmp_string_decoded.offset === (-1)) return; // Error during decoding
 
                         let obj = bmp_string_decoded.result.valueBlock.value;
 
-                        var imiona = obj[4].valueBlock.value[0].valueBlock.value;
-                        var nazwiska = obj[3].valueBlock.value[0].valueBlock.value;
-                        var indeks = obj[5].valueBlock.value;
+                        var names = obj[4].valueBlock.value[0].valueBlock.value;
+                        var surnames = obj[3].valueBlock.value[0].valueBlock.value;
+                        var index = obj[5].valueBlock.value;
 
-                        console.log("\n" + imiona + " || " + nazwiska + " || " + indeks);
+                        var JSONobject = JSON.parse('{"firstName":"' + names + '","lastName":"' + surnames + '","index":"' + index + '"}');
 
-
+                        console.log(JSONobject);
 
                     }).catch(error => {
-                        console.error('Error:', error, error.stack + '\n');
+                        //console.error('Error:', error, error.stack + '\n');
                     });
                   }).catch(error => {
-                      console.error('Error:', error, error.stack + '\n');
+                      //console.error('Error:', error, error.stack + '\n');
                   });
             }).catch(error => {
-                console.error('Error:', error, error.stack + '\n');
+                //console.error('Error:', error, error.stack + '\n');
             });
 
     });
 
-
-
-    device.on('card-removed', event => {
-        console.log(`Card removed from '${event.name}' ` + '\n');
-    });
+    //device.on('card-removed', event => {
+    //    console.log(`Card removed from '${event.name}' ` + '\n');
+  //  });
 
 });
 
-devices.on('device-deactivated', event => {
-    console.log(`Device '${event.device}' deactivated, devices: [${event.devices}]` + '\n');
-});
+//devices.on('device-deactivated', event => {
+//    console.log(`Device '${event.device}' deactivated, devices: [${event.devices}]` + '\n');
+//});
