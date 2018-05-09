@@ -18,15 +18,33 @@
                 label="Indeks">
             </el-table-column>
         </el-table>
+        <download-excel
+            class = "btn btn-default"
+            :data = "tableData"
+            :fields = "tableFields"
+            name = "filename.xls">
+            Exportuj xls
+        </download-excel>
     </div>
 </template>
 <script>
 import { ipcRenderer } from 'electron';
 import { EventBus } from '@/helpers/eventBusHelpers';
+import JsonExcel from 'vue-json-to-excel/JsonExcel';
+
 
 export default {
+    components: {
+      'downloadExcel': JsonExcel
+    },
     data() {
         return {
+            tableFields : {
+                "Data": "DateTime",
+                "Imię": "String",
+                "Nazwisko": "String",
+                "Index": "Number"
+            },
             tableData: [
                 {
                     date: '2018.04.10 13:30:35',
@@ -52,7 +70,15 @@ export default {
                     lastname: 'Wierzbinski',
                     index: '126333'
                 }
-            ]
+            ],
+            tableMeta: [
+                [
+                    {
+                        'key': 'charset',
+                        'value': 'utf-8'
+                    }
+                ]
+            ],
         }
     },
     
