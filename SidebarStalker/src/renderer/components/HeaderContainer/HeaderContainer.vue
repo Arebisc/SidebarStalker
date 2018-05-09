@@ -25,11 +25,11 @@ export default {
         activeIndex2: '1'
       };
     },
+
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
-
       
       triggerExport() {
         EventBus.$emit("exportTableToXls");
