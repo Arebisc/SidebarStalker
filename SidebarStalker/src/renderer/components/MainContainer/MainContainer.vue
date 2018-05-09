@@ -26,8 +26,9 @@ import { ipcRenderer } from 'electron'
 export default {
     data() {
         return {
-            tableData: [{
-                date: '2018.04.10 13:30:35',
+            tableData: [
+                {
+                    date: '2018.04.10 13:30:35',
                     firstname: 'Michał',
                     lastname: 'Sibera',
                     index: '126827'
