@@ -25,6 +25,14 @@
             name = "filename.xls">
             Exportuj xls
         </download-excel>
+        <download-excel
+            class = "btn btn-default"
+            :data = "tableData"
+            :fields = "tableFields"
+            type = "csv"
+            name = "filename.csv">
+            Exportuj csv
+        </download-excel>
     </div>
 </template>
 <script>
