@@ -16,14 +16,13 @@
           <span>Ustawienia</span>
         </template>
           <el-menu-item index="2-1">Eksport</el-menu-item>
-          <el-menu-item index="2-2">Import</el-menu-item>
       </el-submenu>
+      <el-menu-item index="4" @click="countPeople">
+        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
+      </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-setting"></i>
         <span>Wyjście</span>
-      </el-menu-item>
-      <el-menu-item index="4" @click="countPeople">
-        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
       </el-menu-item>
     </el-menu>
 </template>
