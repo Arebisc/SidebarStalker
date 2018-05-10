@@ -40,12 +40,23 @@
         <el-dialog
             title="Dodaj studenta"
             :visible.sync="addStudentFormVisibility"
-            width="30%"
-            :before-close="handleClose">
-            <span>This is a message</span>
+            width="30%">
+
+            <el-form ref="addStudentForm" :rules="addStudentFormRules" :model="addStudentForm" >
+                <el-form-item prop="firstName">
+                    <el-input v-model="addStudentForm.firstName" placeholder="Wprowadź imię studenta"></el-input>
+                </el-form-item>
+                <el-form-item prop="lastName">
+                    <el-input v-model="addStudentForm.lastName" placeholder="Wprowadź nazwisko studenta"></el-input>
+                </el-form-item>
+                <el-form-item prop="index">
+                    <el-input v-model="addStudentForm.index" placeholder="Wprowadź index studenta"></el-input>
+                </el-form-item>
+            </el-form>
+            
             <span slot="footer" class="dialog-footer">
-                <el-button @click="addStudentFormVisibility = false">Cancel</el-button>
-                <el-button type="primary" @click="addStudentFormVisibility = false">Confirm</el-button>
+                <el-button @click="resetForm('ruleForm')">Resetuj</el-button>
+                <el-button type="primary" @click="submitForm">Dodaj</el-button>
             </span>
         </el-dialog>
 
@@ -55,7 +66,7 @@
 import { ipcRenderer } from 'electron';
 import { EventBus } from '@/helpers/eventBusHelpers';
 import JsonExcel from 'vue-json-to-excel/JsonExcel';
-
+import moment from 'moment';
 
 export default {
     components: {
@@ -104,7 +115,26 @@ export default {
                 ]
             ],
 
-            addStudentFormVisibility: false
+            addStudentFormVisibility: false,
+
+            addStudentForm: {
+                firstName: "",
+                lastName: "",
+                index: ""
+            },
+
+            addStudentFormRules: {
+                firstName: [
+                    { required: true, message: 'Imię nie może być puste', trigger: 'blur' }
+                ],
+                lastName: [
+                    { required: true, message: 'Nazwisko nie może być puste', trigger: 'blur' },
+                ],
+                index: [
+                    { required: true, message: 'Index nie może być pusty', trigger: 'blur' },
+                    { min: 1, max: 10, message: 'Index musi mieć długość z zakresu 1 - 10', trigger: 'blur' }
+                ],
+            }
         }
     },
     
@@ -123,13 +153,33 @@ export default {
     },
 
     methods: {
-        handleClose(done) {
-            this.$confirm('Are you sure to close this dialog?')
-            .then(_ => {
-                done();
-            })
-            .catch(_ => {});
-        }
+        submitForm() {
+            this.$refs['addStudentForm'].validate((valid) => {
+                if (valid) {
+                    var student = {
+                        date: moment().format('DD.MM.YYYY h:mm:ss'), // May 10th 2018, 2:08:21 pm,
+                        firstname: this.addStudentForm.firstName,
+                        lastname: this.addStudentForm.lastName,
+                        index: this.addStudentForm.index
+                    }
+
+                    this.tableData.push(student);
+                    this.resetForm();
+                    this.addStudentFormVisibility = false
+                } 
+                else {
+                    this.$notify({
+                        group: 'global',
+                        title: "Błąd!",
+                        text: "Formularz zawiera błędy!"
+                    });
+                }
+            });
+        },
+
+        resetForm() {
+            this.$refs['addStudentForm'].resetFields();
+        }   
     }
 }
 </script>
