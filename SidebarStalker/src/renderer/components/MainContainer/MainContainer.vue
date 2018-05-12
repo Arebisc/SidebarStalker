@@ -23,17 +23,24 @@
         </el-table>
         <download-excel
             class = "btn btn-default"
-            :data = "tableData"
+            :data = "tableData"    
+            type="xls"
+            name = "filename.xls"
+            :meta="tableMeta"
+            :param="tableHeaders"
             :fields = "tableFields"
-            name = "filename.xls">
+            >
             Exportuj xls
         </download-excel>
         <download-excel
             class = "btn btn-default"
-            :data = "tableData"
+            :data = "tableData"    
+            type="csv"
+            name = "filename.csv"
+            :meta="tableMeta"
+            :param="tableHeaders"
             :fields = "tableFields"
-            type = "csv"
-            name = "filename.csv">
+            >
             Exportuj csv
         </download-excel>
 
@@ -72,14 +79,23 @@ export default {
     components: {
       'downloadExcel': JsonExcel
     },
+
     data() {
         return {
-            tableFields : {
-                "Data": "DateTime",
+            tableHeaders : {
+                "date": "Data",
+                "firstname": "Imię",
+                "lastname": "Nazwisko",
+                "index": "Index"
+            },
+
+            tableFields: {
+                "Data": "String",
                 "Imię": "String",
                 "Nazwisko": "String",
-                "Index": "Number"
+                "Index": "String"
             },
+
             tableData: [
                 {
                     date: '2018.04.10 13:30:35',
@@ -106,6 +122,7 @@ export default {
                     index: '126333'
                 }
             ],
+
             tableMeta: [
                 [
                     {
@@ -113,6 +130,10 @@ export default {
                         'value': 'utf-8'
                     }
                 ]
+            ],
+
+            titles: [
+                'Data i godzina', 'Imię', 'Nazwisko', 'Index'
             ],
 
             addStudentFormVisibility: false,
@@ -157,7 +178,7 @@ export default {
             this.$refs['addStudentForm'].validate((valid) => {
                 if (valid) {
                     var student = {
-                        date: moment().format('DD.MM.YYYY h:mm:ss'), // May 10th 2018, 2:08:21 pm,
+                        date: moment().format('DD.MM.YYYY h:mm:ss'),
                         firstname: this.addStudentForm.firstName,
                         lastname: this.addStudentForm.lastName,
                         index: this.addStudentForm.index
