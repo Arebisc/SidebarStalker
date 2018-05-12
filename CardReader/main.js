@@ -11,15 +11,19 @@ const util = require('util');
 const devices = new Devices();
 
 devices.on('device-activated', event => {
+	console.log('Smart card reader active');
     const currentDevices = event.devices;
+			
     let device = event.device;
-
+	
+	device.on('error', function (message) {
+		console.log(`Error '${message}' received`);
+	});
     device.on('card-inserted', event => {
-
         let card = event.card;
         //console.log(`Card '${card.getAtr()}' inserted into '${event.device}'` + '\n');
         const application = new Iso7816Application(card);
-
+	
         application.selectFile([0xD6, 0x16, 0x00, 0x00, 0x30, 0x01, 0x01])
             .then(response => {
               application.issueCommand([0x00,0xA4,0x02,0x00,0x02,0x00,0x02,0x12])
@@ -95,12 +99,12 @@ devices.on('device-activated', event => {
 
     });
 
-    //device.on('card-removed', event => {
-    //    console.log(`Card removed from '${event.name}' ` + '\n');
-  //  });
+    device.on('card-removed', event => {
+       console.log(`Card removed from '${event.name}' ` + '\n');
+	});
 
 });
 
-//devices.on('device-deactivated', event => {
-//    console.log(`Device '${event.device}' deactivated, devices: [${event.devices}]` + '\n');
-//});
+devices.on('device-deactivated', event => {
+    console.log(`Device '${event.device}' deactivated, devices: [${event.devices}]` + '\n');
+});
