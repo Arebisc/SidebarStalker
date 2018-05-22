@@ -21,28 +21,6 @@
                 label="Indeks">
             </el-table-column>
         </el-table>
-        <download-excel
-            class = "btn btn-default"
-            :data = "studentsData"    
-            type="xls"
-            name = "filename.xls"
-            :meta="tableMeta"
-            :param="tableHeaders"
-            :fields = "tableFields"
-            >
-            Exportuj xls
-        </download-excel>
-        <download-excel
-            class = "btn btn-default"
-            :data = "studentsData"    
-            type="csv"
-            name = "filename.csv"
-            :meta="tableMeta"
-            :param="tableHeaders"
-            :fields = "tableFields"
-            >
-            Exportuj csv
-        </download-excel>
 
         <el-dialog
             title="Dodaj studenta"
@@ -71,44 +49,12 @@
 </template>
 <script>
 import { ipcRenderer } from 'electron';
-import { EventBus } from '@/helpers/eventBusHelpers';
-import JsonExcel from 'vue-json-to-excel/JsonExcel';
 import moment from 'moment';
 import { mapGetters } from 'vuex';
 
 export default {
-    components: {
-      'downloadExcel': JsonExcel
-    },
-
     data() {
         return {
-            tableHeaders : {
-                "date": "Data",
-                "firstname": "Imię",
-                "lastname": "Nazwisko",
-                "index": "Index"
-            },
-
-            tableFields: {
-                "Data": "String",
-                "Imię": "String",
-                "Nazwisko": "String",
-                "Index": "String"
-            },
-
-            tableMeta: [
-                [
-                    {
-                        'key': 'charset',
-                        'value': 'utf-8'
-                    }
-                ]
-            ],
-
-            titles: [
-                'Data i godzina', 'Imię', 'Nazwisko', 'Index'
-            ],
 
             addStudentFormVisibility: false,
 
@@ -146,10 +92,6 @@ export default {
                 title: 'Child process',
                 text: args.toString('utf8')
             })
-        });
-
-        EventBus.$on('exportTableToXls', () => {
-            console.log('exportTableToXls called');
         });
     },
 

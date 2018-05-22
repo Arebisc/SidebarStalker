@@ -23,7 +23,7 @@
             Exportuj csv
         </download-excel>
     </el-menu-item>
-    <el-menu-item index="2-2" @click="triggerExport">
+    <el-menu-item index="2-2">
         <download-excel
             class = "btn btn-default"
             :data = "studentsData"    
@@ -40,7 +40,6 @@
 </el-menu>
 </template>
 <script>
-import { EventBus } from '@/helpers/eventBusHelpers';
 import JsonExcel from 'vue-json-to-excel/JsonExcel';
 import { mapGetters } from 'vuex';
 
@@ -88,10 +87,6 @@ export default {
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      },
-      
-      triggerExport() {
-        EventBus.$emit("exportTableToXls");
       }
     },
 
