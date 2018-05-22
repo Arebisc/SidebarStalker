@@ -3,7 +3,7 @@
         <el-button type="primary" @click="addStudentFormVisibility = true">
             Dodaj studenta
         </el-button>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="studentsData" style="width: 100%">
             <el-table-column
                 prop="date"
                 label="Data">
@@ -23,7 +23,7 @@
         </el-table>
         <download-excel
             class = "btn btn-default"
-            :data = "tableData"    
+            :data = "studentsData"    
             type="xls"
             name = "filename.xls"
             :meta="tableMeta"
@@ -34,7 +34,7 @@
         </download-excel>
         <download-excel
             class = "btn btn-default"
-            :data = "tableData"    
+            :data = "studentsData"    
             type="csv"
             name = "filename.csv"
             :meta="tableMeta"
@@ -74,6 +74,7 @@ import { ipcRenderer } from 'electron';
 import { EventBus } from '@/helpers/eventBusHelpers';
 import JsonExcel from 'vue-json-to-excel/JsonExcel';
 import moment from 'moment';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -95,33 +96,6 @@ export default {
                 "Nazwisko": "String",
                 "Index": "String"
             },
-
-            tableData: [
-                {
-                    date: '2018.04.10 13:30:35',
-                    firstname: 'Michał',
-                    lastname: 'Sibera',
-                    index: '126827'
-                }, 
-                {
-                    date: '2018.04.10 13:31:22',
-                    firstname: 'Dawid',
-                    lastname: 'Wojciechowski',
-                    index: '126112'
-                }, 
-                {
-                    date: '2018.04.10 13:30:56',
-                    firstname: 'Sebastian',
-                    lastname: 'Niespodziany',
-                    index: '126222'
-                }, 
-                {
-                    date: '2018.04.10 13:45:00',
-                    firstname: 'Bartłomiej',
-                    lastname: 'Wierzbinski',
-                    index: '126333'
-                }
-            ],
 
             tableMeta: [
                 [
@@ -157,6 +131,12 @@ export default {
                 ],
             }
         }
+    },
+
+    computed: {
+        ...mapGetters([ 
+            'studentsData'
+        ])
     },
     
     created() {
