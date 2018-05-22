@@ -5,7 +5,7 @@ export const actions = {
         commit('SET_COUNTER', payload);
     },
 
-    addStudent({ commit, state }, payload) {
+    addStudentToList({ commit, state }, payload) {
         commit('ADD_STUDENT', payload);
     }
 };

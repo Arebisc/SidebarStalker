@@ -164,7 +164,7 @@ export default {
                         index: this.addStudentForm.index
                     }
 
-                    this.tableData.push(student);
+                    this.$store.dispatch('addStudentToList', student);
                     this.resetForm();
                     this.addStudentFormVisibility = false
                 } 

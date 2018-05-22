@@ -6,6 +6,6 @@ export const mutations = {
     },
 
     ADD_STUDENT(state, payload) {
-        Vue.set(state, 'studentsData', state.studentsData.push(payload));
+        state.studentsData.push(payload);
     }
 };
