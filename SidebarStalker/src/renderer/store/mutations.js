@@ -7,5 +7,9 @@ export const mutations = {
 
     ADD_STUDENT(state, payload) {
         state.studentsData.push(payload);
-    }
+    },
+    
+    SET_USER_LANGUAGE(state, lang) {
+        Vue.set(state, 'lang', lang);
+    },
 };

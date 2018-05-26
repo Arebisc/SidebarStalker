@@ -34,7 +34,8 @@ const state = {
             lastname: 'Wierzbinski',
             index: '126333'
         }
-    ]
+    ],
+    lang: 'pl',
 };
 
 export default new Vuex.Store({
