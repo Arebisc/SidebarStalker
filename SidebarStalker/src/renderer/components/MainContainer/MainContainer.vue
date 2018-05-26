@@ -1,47 +1,47 @@
 <template>
     <div class="main-container__wrapper">
         <el-button type="primary" @click="addStudentFormVisibility = true">
-            Dodaj studenta
+            {{ $t('custom.studentForm.addStudent') }}
         </el-button>
         <el-table :data="studentsData" style="width: 100%">
             <el-table-column
                 prop="date"
-                label="Data">
+                :label="$t('custom.studentForm.date')">
             </el-table-column>
             <el-table-column
                 prop="firstname"
-                label="Imię">
+                :label="$t('custom.studentForm.firstname')">
             </el-table-column>
             <el-table-column
                 prop="lastname"
-                label="Nazwisko">
+                :label="$t('custom.studentForm.lastname')">
             </el-table-column>
             <el-table-column
                 prop="index"
-                label="Indeks">
+                :label="$t('custom.studentForm.index')">
             </el-table-column>
         </el-table>
 
         <el-dialog
-            title="Dodaj studenta"
+            :title="$t('custom.studentForm.addStudent')"
             :visible.sync="addStudentFormVisibility"
             width="30%">
 
             <el-form ref="addStudentForm" :rules="addStudentFormRules" :model="addStudentForm" >
                 <el-form-item prop="firstName">
-                    <el-input v-model="addStudentForm.firstName" placeholder="Wprowadź imię studenta"></el-input>
+                    <el-input v-model="addStudentForm.firstName" :placeholder="$t('custom.studentForm.placeholders.firstname')"></el-input>
                 </el-form-item>
                 <el-form-item prop="lastName">
-                    <el-input v-model="addStudentForm.lastName" placeholder="Wprowadź nazwisko studenta"></el-input>
+                    <el-input v-model="addStudentForm.lastName" :placeholder="$t('custom.studentForm.placeholders.lastname')"></el-input>
                 </el-form-item>
                 <el-form-item prop="index">
-                    <el-input v-model="addStudentForm.index" placeholder="Wprowadź index studenta"></el-input>
+                    <el-input v-model="addStudentForm.index" :placeholder="$t('custom.studentForm.placeholders.index')"></el-input>
                 </el-form-item>
             </el-form>
             
             <span slot="footer" class="dialog-footer">
-                <el-button @click="resetForm('ruleForm')">Resetuj</el-button>
-                <el-button type="primary" @click="submitForm">Dodaj</el-button>
+                <el-button @click="resetForm('ruleForm')">{{ $t('custom.studentForm.reset') }}</el-button>
+                <el-button type="primary" @click="submitForm"> {{ $t('custom.studentForm.add') }}</el-button>
             </span>
         </el-dialog>
 
@@ -66,14 +66,14 @@ export default {
 
             addStudentFormRules: {
                 firstName: [
-                    { required: true, message: 'Imię nie może być puste', trigger: 'blur' }
+                    { required: true, message: this.$t('custom.studentForm.validators.firstnameNotEmpty'), trigger: 'blur' }
                 ],
                 lastName: [
-                    { required: true, message: 'Nazwisko nie może być puste', trigger: 'blur' },
+                    { required: true, message: this.$t('custom.studentForm.validators.lastnameNotEmpty'), trigger: 'blur' },
                 ],
                 index: [
-                    { required: true, message: 'Index nie może być pusty', trigger: 'blur' },
-                    { min: 1, max: 10, message: 'Index musi mieć długość z zakresu 1 - 10', trigger: 'blur' }
+                    { required: true, message: this.$t('custom.studentForm.validators.indexNotEmpty'), trigger: 'blur' },
+                    { min: 1, max: 10, message: this.$t('custom.studentForm.validators.indexLenght'), trigger: 'blur' }
                 ],
             }
         }
