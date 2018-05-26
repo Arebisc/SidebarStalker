@@ -10,13 +10,10 @@
           <i class="el-icon-location"></i>
           <span>{{ $t('custom.asideMenuBar.lecture') }}</span>
       </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
+      <el-menu-item index="2">
           <i class="el-icon-menu"></i>
           <span>{{ $t('custom.asideMenuBar.settings') }}</span>
-        </template>
-      <el-menu-item index="2-1">{{ $t('custom.asideMenuBar.export') }}</el-menu-item>
-      </el-submenu>
+      </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-setting"></i>
         <span>{{ $t('custom.asideMenuBar.exit') }}</span>
