@@ -25,8 +25,14 @@ export const en = {
     asideMenuBar: {
         lecture: 'Lecture',
         settings: 'Settings',
-        export: 'Export',
         exit: 'Exit',
         detectedPeopleNumber: 'Detected people number'
+    },
+
+    header: {
+        studentsTable: 'Students Table',
+        export: 'Export',
+        exportCSV: 'Export CSV',
+        exportXLS: 'Export XLS'
     }
 }

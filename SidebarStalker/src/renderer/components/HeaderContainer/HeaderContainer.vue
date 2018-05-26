@@ -7,9 +7,9 @@
   background-color="#545c64"
   text-color="#fff"
   active-text-color="#ffd04b">
-  <el-menu-item index="1">Tabela studentów</el-menu-item>
+  <el-menu-item index="1">{{ $t('custom.header.studentsTable') }}</el-menu-item>
   <el-submenu index="2">
-    <template slot="title">Eksport</template>
+    <template slot="title">{{ $t('custom.header.export') }}</template>
     <el-menu-item index="2-1">
         <download-excel
             class = "btn btn-default"
@@ -20,7 +20,7 @@
             :param="tableHeaders"
             :fields = "tableFields"
             >
-            Exportuj csv
+            {{ $t('custom.header.exportCSV') }}
         </download-excel>
     </el-menu-item>
     <el-menu-item index="2-2">
@@ -33,7 +33,7 @@
             :param="tableHeaders"
             :fields = "tableFields"
             >
-            Exportuj xls
+            {{ $t('custom.header.exportXLS') }}
         </download-excel>
     </el-menu-item>
   </el-submenu>

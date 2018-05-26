@@ -28,5 +28,12 @@ export const pl = {
         export: 'Eksport',
         exit: 'Wyjście',
         detectedPeopleNumber: 'Wykryta liczba osób'
+    },
+
+    header: {
+        studentsTable: 'Tabela studentów',
+        export: 'Eksport',
+        exportCSV: 'Eksport CSV',
+        exportXLS: 'Eksport XLS'
     }
 }
