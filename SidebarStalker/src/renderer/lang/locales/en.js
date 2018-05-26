@@ -20,5 +20,13 @@ export const en = {
             indexNotEmpty: 'Index cannot be empty',
             indexLenght: 'Index has to be 1-10 lenght'
         }
+    },
+
+    asideMenuBar: {
+        lecture: 'Lecture',
+        settings: 'Settings',
+        export: 'Export',
+        exit: 'Exit',
+        detectedPeopleNumber: 'Detected people number'
     }
 }

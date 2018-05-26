@@ -20,5 +20,13 @@ export const pl = {
             indexNotEmpty: 'Indeks nie może być pusty',
             indexLenght: 'Indeks musi mieć długość z zakresu 1-10'
         }
+    },
+
+    asideMenuBar: {
+        lecture: 'Wykład',
+        settings: 'Ustawienia',
+        export: 'Eksport',
+        exit: 'Wyjście',
+        detectedPeopleNumber: 'Wykryta liczba osób'
     }
 }

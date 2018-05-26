@@ -8,21 +8,21 @@
       >
       <el-menu-item index="1">
           <i class="el-icon-location"></i>
-          <span>Wykład</span>
+          <span>{{ $t('custom.asideMenuBar.lecture') }}</span>
       </el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-menu"></i>
-          <span>Ustawienia</span>
+          <span>{{ $t('custom.asideMenuBar.settings') }}</span>
         </template>
-      <el-menu-item index="2-1">Eksport</el-menu-item>
+      <el-menu-item index="2-1">{{ $t('custom.asideMenuBar.export') }}</el-menu-item>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-setting"></i>
-        <span>Wyjście</span>
+        <span>{{ $t('custom.asideMenuBar.exit') }}</span>
       </el-menu-item>
       <el-menu-item index="4" @click="countPeople">
-        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
+        <span>{{ $t('custom.asideMenuBar.detectedPeopleNumber') }}: {{ numberOfPeople }} </span>
       </el-menu-item>
     </el-menu>
 </template>
