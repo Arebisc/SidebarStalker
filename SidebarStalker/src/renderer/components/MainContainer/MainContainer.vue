@@ -113,8 +113,8 @@ export default {
                 else {
                     this.$notify({
                         group: 'global',
-                        title: "Błąd!",
-                        text: "Formularz zawiera błędy!"
+                        title: this.$t('custom.notifications.error') + '!',
+                        text: this.$t('custom.notifications.formErrors') + '!'
                     });
                 }
             });

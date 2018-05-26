@@ -34,5 +34,10 @@ export const en = {
         export: 'Export',
         exportCSV: 'Export CSV',
         exportXLS: 'Export XLS'
+    },
+
+    notifications: {
+        error: 'Error!',
+        formErrors: 'Form contains error'
     }
 }

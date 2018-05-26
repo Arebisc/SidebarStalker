@@ -35,5 +35,10 @@ export const pl = {
         export: 'Eksport',
         exportCSV: 'Eksport CSV',
         exportXLS: 'Eksport XLS'
+    },
+
+    notifications: {
+        error: 'Błąd',
+        formErrors: 'Formularz zawiera błędy'
     }
 }
