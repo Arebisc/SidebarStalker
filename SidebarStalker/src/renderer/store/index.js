@@ -36,6 +36,10 @@ const state = {
         }
     ],
     lang: 'pl',
+    settings: {
+        cameraIp: '',
+        cameraPort: ''
+    }
 };
 
 export default new Vuex.Store({

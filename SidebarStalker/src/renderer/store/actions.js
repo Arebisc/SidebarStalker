@@ -13,4 +13,8 @@ export const actions = {
         langConfig.vm.$i18n.locale = langConfig.lang;
         commit('SET_USER_LANGUAGE', langConfig.lang);
     },
+
+    setAppSettings({ commit, state }, settings) {
+        commit('SET_APP_SETTINGS', settings);
+    }
 };
