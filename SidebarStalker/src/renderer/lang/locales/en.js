@@ -39,5 +39,20 @@ export const en = {
     notifications: {
         error: 'Error!',
         formErrors: 'Form contains error'
+    },
+
+    settingsForm: {
+        cancel: 'Cancel',
+        submit: 'Change',
+
+        placeholders: {
+            cameraPort: 'IP camera port',
+            cameraIp: 'IP camera adress'
+        },
+
+        validators: {
+            cameraIpNotEmpty: 'Camera IP cannot be empty',
+            cameraPortNotEmpty: 'Camera port cannot be empty'
+        }
     }
 }

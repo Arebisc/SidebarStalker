@@ -40,5 +40,20 @@ export const pl = {
     notifications: {
         error: 'Błąd',
         formErrors: 'Formularz zawiera błędy'
+    },
+
+    settingsForm: {
+        cancel: 'Anuluj',
+        submit: 'Zmień',
+
+        placeholders: {
+            cameraPort: 'Port kamery IP',
+            cameraIp: 'Adres IP kamery'
+        },
+
+        validators: {
+            cameraIpNotEmpty: 'IP kamery nie może być puste',
+            cameraPortNotEmpty: 'Port kamery nie może być pusty'
+        }
     }
 }
