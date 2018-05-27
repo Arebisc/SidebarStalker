@@ -6,11 +6,11 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       >
-      <el-menu-item index="1">
+      <el-menu-item index="1" @click="$router.push({ name: 'main-page'})">
           <i class="el-icon-location"></i>
           <span>{{ $t('custom.asideMenuBar.lecture') }}</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="2" @click="$router.push({ name: 'settings-page' })">
           <i class="el-icon-menu"></i>
           <span>{{ $t('custom.asideMenuBar.settings') }}</span>
       </el-menu-item>
