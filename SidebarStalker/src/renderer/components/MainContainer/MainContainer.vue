@@ -64,7 +64,17 @@ export default {
                 index: ""
             },
 
-            addStudentFormRules: {
+            
+        }
+    },
+
+    computed: {
+        ...mapGetters([ 
+            'studentsData'
+        ]),
+
+        addStudentFormRules() {
+            return {
                 firstName: [
                     { required: true, message: this.$t('custom.studentForm.validators.firstnameNotEmpty'), trigger: 'blur' }
                 ],
@@ -77,12 +87,6 @@ export default {
                 ],
             }
         }
-    },
-
-    computed: {
-        ...mapGetters([ 
-            'studentsData'
-        ])
     },
     
     created() {
