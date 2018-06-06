@@ -39,7 +39,9 @@ export const en = {
     notifications: {
         error: 'Error!',
         formErrors: 'Form contains error',
-        cameraErrorOccured: 'Camera error occured! Please check your ip camera settings'
+        cameraErrorOccured: 'Camera error occured! Please check your ip camera settings',
+        success: 'Success',
+        successChanged: 'Successfully changed settings.'
     },
 
     settingsForm: {

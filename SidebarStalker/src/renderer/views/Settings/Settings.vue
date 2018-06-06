@@ -43,6 +43,11 @@ export default {
                     ipcRenderer.send('save-appsettings-request', self.settingsForm);
                     ipcRenderer.on('save-appsettings-response', (event, args) => {
                         self.$store.dispatch('setAppSettings', args);
+                        this.$notify({
+                            group: 'global',
+                            title: this.$t('custom.notifications.success'),
+                            text: this.$t('custom.notifications.successChanged')
+                        });
                     });
                 }
             });
