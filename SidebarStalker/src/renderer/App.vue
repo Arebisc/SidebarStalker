@@ -23,6 +23,7 @@
 import { SidebarStalkerUtils } from '@/helpers/sidebarStalkerUtils';
 import AsideContainer from '@/components/AsideContainer/AsideContainer';
 import HeaderContainer from '@/components/HeaderContainer/HeaderContainer';
+import { ipcRenderer } from 'electron';
 
 export default {
   components: {
@@ -35,6 +36,7 @@ export default {
   created() {
     this.getUserLanguage();
     this.setEventListiners();
+    this.readAppsettings();
   },
 
   methods: {
@@ -53,6 +55,14 @@ export default {
       let lang = this.$store.getters.lang == "pl" ? "en" : "pl";
       this.$store.dispatch("setUserLanguage", { vm: this, lang: lang });
     },
+
+    readAppsettings() {
+      ipcRenderer.send('read-appsettings-request');
+      ipcRenderer.on('read-appsettings-response', (event, args) => {
+        debugger;
+        this.$store.dispatch('setAppSettings', args);
+      });
+    }
   },
 
   computed: {

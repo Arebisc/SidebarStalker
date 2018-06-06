@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { Detect } from './../core/visionDetection/Count';
+import { SidebarStalkerUtils } from './../../src/renderer/helpers/sidebarStalkerUtils';
 import * as child_process from 'child_process';
 import path from 'path';
 
@@ -54,9 +55,21 @@ ipcMain.on('detect-people-request', (event, arg) => {
     event.sender.send('detect-people-response', detectedPeople);
   });
 });
+
+ipcMain.on('read-appsettings-request', (event, args) => {
+  SidebarStalkerUtils
+    .readAppsettingsFile()
+    .then(response => {
+      console.log(response);
+      event.sender.send('read-appsettings-response', response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
   
 let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'ping.js');
-console.log(pingingScriptPath);
 
 let childPingingScript = child_process.spawn('node', [ pingingScriptPath ]);
 childPingingScript.stdout.on('data', (data) => {

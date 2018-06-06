@@ -25,6 +25,11 @@ export default {
         }
     },
 
+    created () {
+        this.settingsForm.cameraPort = this.$store.getters.settings.cameraPort;
+        this.settingsForm.cameraIp = this.$store.getters.settings.cameraIp;
+    },
+
     methods: {
         submitForm() {
             debugger;
