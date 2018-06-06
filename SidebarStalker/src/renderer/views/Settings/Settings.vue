@@ -38,7 +38,6 @@ export default {
         submitForm() {
             let self = this;
             this.$refs["settingsForm"].validate((valid) => {
-                debugger;
                 if (valid) {
                     ipcRenderer.send('save-appsettings-request', self.settingsForm);
                     ipcRenderer.on('save-appsettings-response', (event, args) => {
