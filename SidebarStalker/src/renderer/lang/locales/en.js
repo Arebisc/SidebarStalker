@@ -41,7 +41,8 @@ export const en = {
         formErrors: 'Form contains error',
         cameraErrorOccured: 'Camera error occured! Please check your ip camera settings',
         success: 'Success',
-        successChanged: 'Successfully changed settings.'
+        successChanged: 'Successfully changed settings.',
+        studentAdded: 'Added student'
     },
 
     settingsForm: {

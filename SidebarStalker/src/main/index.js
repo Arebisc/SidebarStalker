@@ -84,9 +84,10 @@ ipcMain.on('save-appsettings-request', (event, args) => {
     });
 });
   
-let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'main.js');
+let smartcardScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'main.js');
 
-let childPingingScript = child_process.spawn('node', [ pingingScriptPath ]);
-childPingingScript.stdout.on('data', (data) => {
-  mainWindow.webContents.send('pingCommunicate', data);
+let smartcardScript = child_process.spawn('node', [ smartcardScriptPath ]);
+smartcardScript.stdout.on('data', (data) => {
+  console.log(data.toString());
+  mainWindow.webContents.send('studentOccured', data.toString());
 });
