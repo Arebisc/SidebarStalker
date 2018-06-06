@@ -51,8 +51,14 @@ app.on('activate', () => {
 })
 
 ipcMain.on('detect-people-request', (event, arg) => {
-  Detect().then((detectedPeople) => {
+  console.log(arg);
+  Detect(arg)
+  .then((detectedPeople) => {
     event.sender.send('detect-people-response', detectedPeople);
+  })
+  .catch(err => {
+    console.log('catched: ' + err);
+    event.sender.send('detect-people-error', err);
   });
 });
 
@@ -60,7 +66,6 @@ ipcMain.on('read-appsettings-request', (event, args) => {
   SidebarStalkerUtils
     .readAppsettingsFile()
     .then(response => {
-      console.log(response);
       event.sender.send('read-appsettings-response', response);
     })
     .catch(err => {
@@ -72,7 +77,6 @@ ipcMain.on('save-appsettings-request', (event, args) => {
   SidebarStalkerUtils
     .saveAppsettingsFile(args)
     .then(response => {
-      console.log(response);
       event.sender.send('save-appsettings-response', args);
     })
     .catch(err => {

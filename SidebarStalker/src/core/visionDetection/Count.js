@@ -3,30 +3,27 @@ const path = require('path');
 
 const baseProjectDirectory = process.cwd();
 const visionDetectionDirectoryPath = path.join(baseProjectDirectory, 'src', 'core', 'visionDetection');
-const port = '8080';
-const ip = '192.168.43.1'
 
-let options = {
-  //mode: 'text',
-  //pythonPath: 'path/to/python',
- // pythonOptions: ['-u'],
- // scriptPath: 'path/to/my/scripts',
-  args: [
-    '--model=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.caffemodel'),
-    '--prototxt=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.prototxt'),
-    '--camera_Port=' + port ,
-    '--camera_IP=' +  ip]
-};
+export function Detect(settings) {
+  let options = {
+    args: [
+      '--model=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.caffemodel'),
+      '--prototxt=' + path.join(visionDetectionDirectoryPath, 'MobileNetSSD_deploy.prototxt'),
+      '--camera_Port=' + settings.cameraPort ,
+      '--camera_IP=' +  settings.cameraIp
+    ]
+  };
 
-export function Detect() {
   return new Promise((resolve, reject) => {
-    let scriptFilename = process.cwd() + '\\src\\core\\visionDetection\\Detection.py';
+    let scriptFilename = process.cwd() +  path.join( '\\', 'src', 'core', 'visionDetection', 'Detection.py');
 
     PythonShell.run(scriptFilename, options, function (err, results) {
-      if (err)
+      if (err || !results[0]) {
         reject(err);
-
-      resolve(results[0]);
+      }
+      else {
+        resolve(results[0]);
+      }
     });
   });
 }

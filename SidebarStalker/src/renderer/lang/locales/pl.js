@@ -39,7 +39,8 @@ export const pl = {
 
     notifications: {
         error: 'Błąd',
-        formErrors: 'Formularz zawiera błędy'
+        formErrors: 'Formularz zawiera błędy',
+        cameraErrorOccured: 'Wystąpił błąd kamery! Prosimy sprawdzić jeszcze raz parametry połączenia w ustawieniach'
     },
 
     settingsForm: {

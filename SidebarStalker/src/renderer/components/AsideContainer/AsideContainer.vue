@@ -35,16 +35,35 @@ export default {
   },
   methods: {
     countPeople() {
-      ipcRenderer.send("detect-people-request");
+      let settings = {
+        "cameraPort": this.$store.getters.settings.cameraPort,
+        "cameraIp": this.$store.getters.settings.cameraIp
+      }
+
+      ipcRenderer.send("detect-people-request", settings);
     },
+
+    notifyCameraError() {
+      let self = this;
+
+      this.$notify({
+        group: 'global',
+        title: self.$t("custom.notifications.error"),
+        text: self.$t("custom.notifications.cameraErrorOccured"),
+        duration: 10000
+      });
+    }
   },
   created() {
     let self = this;
 
     ipcRenderer.on("detect-people-response", (event, args) => {
-      console.log("Number of people: " + args);
       self.numberOfPeople = args;
     });
+
+    ipcRenderer.on("detect-people-error", (event, args) => {
+      self.notifyCameraError();
+    })
 
     ipcRenderer.on("ping", data => {
       console.log(data);
