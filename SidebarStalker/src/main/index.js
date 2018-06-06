@@ -68,6 +68,17 @@ ipcMain.on('read-appsettings-request', (event, args) => {
     });
 });
 
+ipcMain.on('save-appsettings-request', (event, args) => {
+  SidebarStalkerUtils
+    .saveAppsettingsFile(args)
+    .then(response => {
+      console.log(response);
+      event.sender.send('save-appsettings-response', args);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
   
 let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'ping.js');
 

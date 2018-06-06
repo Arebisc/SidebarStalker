@@ -34,7 +34,7 @@ export class SidebarStalkerUtils {
 
     static saveAppsettingsFile = (appsettingsData) => {
         return new Promise((resolve, reject) => {
-            fs.writeFile(appsettingsPath, appsettingsData, encoding, (err) => {
+            fs.writeFile(appsettingsPath, JSON.stringify(appsettingsData), encoding, (err) => {
                 if(err) {
                     reject(err);
                 }

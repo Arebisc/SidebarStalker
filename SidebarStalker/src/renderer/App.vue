@@ -59,7 +59,6 @@ export default {
     readAppsettings() {
       ipcRenderer.send('read-appsettings-request');
       ipcRenderer.on('read-appsettings-response', (event, args) => {
-        debugger;
         this.$store.dispatch('setAppSettings', args);
       });
     }

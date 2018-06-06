@@ -17,6 +17,8 @@
     </div>
 </template>
 <script>
+import { ipcRenderer } from 'electron';
+
 export default {
     data() {
         return {
@@ -34,7 +36,15 @@ export default {
 
     methods: {
         submitForm() {
-            debugger;
+            let self = this;
+            this.$refs["settingsForm"].validate((valid) => {
+                if (valid) {
+                    ipcRenderer.send('save-appsettings-request', self.settingsForm);
+                    ipcRenderer.on('save-appsettings-response', (event, args) => {
+                        self.$store.dispatch('setAppSettings', args);
+                    });
+                }
+            });
         }
     },
 
