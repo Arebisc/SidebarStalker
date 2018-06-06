@@ -51,6 +51,7 @@
 import { ipcRenderer } from 'electron';
 import moment from 'moment';
 import { mapGetters } from 'vuex';
+import { SidebarStalkerUtils } from '@/helpers/sidebarStalkerUtils';
 
 export default {
     data() {
@@ -90,12 +91,23 @@ export default {
     },
     
     created() {
-        ipcRenderer.on('pingCommunicate', (event, args) => {
-            this.$notify({
-                group: 'global',
-                title: 'Child process',
-                text: args.toString('utf8')
-            })
+        ipcRenderer.on('studentOccured', (event, args) => {
+            let splittedResponse = args.split('|');
+
+            if(splittedResponse.length === 3) {
+                let student = {
+                    date: moment().format('DD.MM.YYYY h:mm:ss'),
+                    firstname: splittedResponse[0].trim(),
+                    lastname: splittedResponse[1].trim(),
+                    index: splittedResponse[2].trim()
+                }
+                this.$store.dispatch('addStudentToList', student);
+
+                this.$notify({
+                    group: 'global',
+                    text: this.$t('custom.notifications.studentAdded')
+                });
+            }
         });
     },
 
