@@ -27,7 +27,7 @@ export const pl = {
         settings: 'Ustawienia',
         export: 'Eksport',
         exit: 'Wyjście',
-        detectedPeopleNumber: 'Wykryta liczba osób'
+        detectedPeopleNumber: 'Liczba wykrytych osób'
     },
 
     header: {
