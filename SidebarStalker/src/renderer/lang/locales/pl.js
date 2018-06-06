@@ -42,7 +42,8 @@ export const pl = {
         formErrors: 'Formularz zawiera błędy',
         cameraErrorOccured: 'Wystąpił błąd kamery! Prosimy sprawdzić jeszcze raz parametry połączenia w ustawieniach.',
         success: 'Sukces',
-        successChanged: 'Poprawnie zmodyfikowano ustawienia.'
+        successChanged: 'Poprawnie zmodyfikowano ustawienia.',
+        studentAdded: 'Dodano studenta'
     },
 
     settingsForm: {
