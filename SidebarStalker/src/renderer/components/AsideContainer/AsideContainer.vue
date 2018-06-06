@@ -14,7 +14,7 @@
           <i class="el-icon-menu"></i>
           <span>{{ $t('custom.asideMenuBar.settings') }}</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="3" @click="handleAppExit">
         <i class="el-icon-setting"></i>
         <span>{{ $t('custom.asideMenuBar.exit') }}</span>
       </el-menu-item>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { ipcRenderer } from "electron";
+import { ipcRenderer, remote } from "electron";
 
 export default {
   data() {
@@ -52,6 +52,11 @@ export default {
         text: self.$t("custom.notifications.cameraErrorOccured"),
         duration: 10000
       });
+    },
+
+    handleAppExit() {
+      let window = remote.getCurrentWindow();
+      window.close();
     }
   },
   created() {
