@@ -1,6 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { Detect } from './../core/visionDetection/Count';
-import { execFile, fork } from 'child_process';
+import { SidebarStalkerUtils } from './../../src/renderer/helpers/sidebarStalkerUtils';
+import * as child_process from 'child_process';
+import path from 'path';
 
 const baseProjectDirectory = process.cwd();
 
@@ -32,11 +34,6 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
-  let pingingProcess = execFile(baseProjectDirectory + '\\src\\core\\cardReader\\ping');
-  pingingProcess.stdout.on('data', (data) => {
-    mainWindow.webContents.send('ping', data);
-  });
 }
 
 app.on('ready', createWindow)
@@ -54,7 +51,43 @@ app.on('activate', () => {
 })
 
 ipcMain.on('detect-people-request', (event, arg) => {
-  Detect().then((detectedPeople) => {
+  console.log(arg);
+  Detect(arg)
+  .then((detectedPeople) => {
     event.sender.send('detect-people-response', detectedPeople);
+  })
+  .catch(err => {
+    console.log('catched: ' + err);
+    event.sender.send('detect-people-error', err);
   });
+});
+
+ipcMain.on('read-appsettings-request', (event, args) => {
+  SidebarStalkerUtils
+    .readAppsettingsFile()
+    .then(response => {
+      event.sender.send('read-appsettings-response', response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+ipcMain.on('save-appsettings-request', (event, args) => {
+  SidebarStalkerUtils
+    .saveAppsettingsFile(args)
+    .then(response => {
+      event.sender.send('save-appsettings-response', args);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+  
+let smartcardScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'main.js');
+
+let smartcardScript = child_process.spawn('node', [ smartcardScriptPath ]);
+smartcardScript.stdout.on('data', (data) => {
+  console.log(data.toString());
+  mainWindow.webContents.send('studentOccured', data.toString());
 });

@@ -1,6 +1,6 @@
 function pingMessage() {
     setTimeout(function () {
-        console.log('ping');
+        // console.log('ping');
         pingMessage();
     }, 5000);
 }

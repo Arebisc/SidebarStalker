@@ -6,57 +6,77 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       >
-      <el-menu-item index="1">
+      <el-menu-item index="1" @click="$router.push({ name: 'main-page'})">
           <i class="el-icon-location"></i>
-          <span>Wykład</span>
+          <span>{{ $t('custom.asideMenuBar.lecture') }}</span>
       </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
+      <el-menu-item index="2" @click="$router.push({ name: 'settings-page' })">
           <i class="el-icon-menu"></i>
-          <span>Ustawienia</span>
-        </template>
-          <el-menu-item index="2-1">Eksport</el-menu-item>
-          <el-menu-item index="2-2">Import</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="3">
+          <span>{{ $t('custom.asideMenuBar.settings') }}</span>
+      </el-menu-item>
+      <el-menu-item index="3" @click="handleAppExit">
         <i class="el-icon-setting"></i>
-        <span>Wyjście</span>
+        <span>{{ $t('custom.asideMenuBar.exit') }}</span>
       </el-menu-item>
       <el-menu-item index="4" @click="countPeople">
-        <span>Wykryta liczba osób: {{ numberOfPeople }} </span>
+        <span>{{ $t('custom.asideMenuBar.detectedPeopleNumber') }}: {{ numberOfPeople }} </span>
       </el-menu-item>
     </el-menu>
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, remote } from "electron";
 
 export default {
   data() {
     return {
       numberOfPeople: 0
-    }
+    };
   },
   methods: {
     countPeople() {
-      ipcRenderer.send('detect-people-request');
+      let settings = {
+        "cameraPort": this.$store.getters.settings.cameraPort,
+        "cameraIp": this.$store.getters.settings.cameraIp
+      }
+
+      ipcRenderer.send("detect-people-request", settings);
+    },
+
+    notifyCameraError() {
+      let self = this;
+
+      this.$notify({
+        group: 'global',
+        title: self.$t("custom.notifications.error"),
+        text: self.$t("custom.notifications.cameraErrorOccured"),
+        duration: 10000
+      });
+    },
+
+    handleAppExit() {
+      let window = remote.getCurrentWindow();
+      window.close();
     }
   },
   created() {
     let self = this;
 
-    ipcRenderer.on('detect-people-response', (event, args) => {
-      console.log('Number of people: ' + args);  
+    ipcRenderer.on("detect-people-response", (event, args) => {
       self.numberOfPeople = args;
     });
 
-    ipcRenderer.on('ping', (data) => {
+    ipcRenderer.on("detect-people-error", (event, args) => {
+      self.notifyCameraError();
+    })
+
+    ipcRenderer.on("ping", data => {
       console.log(data);
     });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './AsideContainer.scss';
+@import "./AsideContainer.scss";
 </style>

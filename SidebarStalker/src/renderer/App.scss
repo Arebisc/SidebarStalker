@@ -4,3 +4,21 @@ body {
     font-family: 'Lato';
     margin: 0;
 }
+
+.switch-lang__button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px
+}
+
+#mainpage__wrapper {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0; 
+}
+
+.nav-bar {
+    min-height: 100%;
+}

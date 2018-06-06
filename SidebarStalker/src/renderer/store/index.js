@@ -8,7 +8,12 @@ import { mutations } from './mutations.js';
 Vue.use(Vuex);
 
 const state = {
-    counter: 0
+    studentsData: [],
+    lang: 'pl',
+    settings: {
+        cameraIp: '',
+        cameraPort: ''
+    }
 };
 
 export default new Vuex.Store({
