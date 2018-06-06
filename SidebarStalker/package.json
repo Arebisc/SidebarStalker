@@ -1,10 +1,15 @@
 {
   "name": "sidebarstalker",
   "productName": "sidebarstalker",
-  "version": "0.0.0",
-  "author": "",
-  "description": "An electron-vue project",
-  "license": null,
+  "version": "1.0.0",
+  "authors": {
+    "Michał Sibera": "michal.sibera@windowslive.com",
+    "Dawid Wojciechowski": "wojciechdavid@gmail.com",
+    "Sebastian Niespodziany":"sebastianniespodziany@gmail.com",
+    "Bartłomiej Wierzbinski": "bartlomiej.wierzbinski@protonmail.com"
+  },
+  "description": "An academic project for checking presence, based on electron-vue boilerplate by SimulatedGreg (https://github.com/SimulatedGREG)",
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js",
