@@ -2,9 +2,11 @@
     <div class="settings-container__wrapper">
         <el-form ref="settingsForm" :rules="settingsFromRules" :model="settingsForm" >
             <el-form-item prop="cameraPort">
+                <label>Port IP</label>
                 <el-input v-model="settingsForm.cameraPort" :placeholder="$t('custom.settingsForm.placeholders.cameraPort')"></el-input>
             </el-form-item>
             <el-form-item prop="cameraIp">
+                <label>Adres IP</label>
                 <el-input v-model="settingsForm.cameraIp" :placeholder="$t('custom.settingsForm.placeholders.cameraIp')"></el-input>
             </el-form-item>
              <el-form-item>
