@@ -26,7 +26,7 @@ export const en = {
         lecture: 'Lecture',
         settings: 'Settings',
         exit: 'Exit',
-        detectedPeopleNumber: 'Detected people number'
+        detectedPeopleNumber: 'Detected people'
     },
 
     header: {
