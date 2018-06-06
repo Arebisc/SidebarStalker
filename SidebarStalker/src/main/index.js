@@ -84,7 +84,7 @@ ipcMain.on('save-appsettings-request', (event, args) => {
     });
 });
   
-let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'ping.js');
+let pingingScriptPath = path.join(baseProjectDirectory, 'src', 'core', 'cardReader', 'main.js');
 
 let childPingingScript = child_process.spawn('node', [ pingingScriptPath ]);
 childPingingScript.stdout.on('data', (data) => {
