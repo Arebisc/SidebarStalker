@@ -83,9 +83,9 @@ devices.on('device-activated', event => {
                         var surnames = obj[3].valueBlock.value[0].valueBlock.value;
                         var index = obj[5].valueBlock.value;
 
-                        var JSONobject = JSON.parse('{"firstName":"' + names + '","lastName":"' + surnames + '","index":"' + index + '"}');
+                        var JSONstring = names.trim() + '|' + surnames.trim() + '|' + index.trim();
 
-                        console.log(JSONobject);
+                        console.log(JSONstring);
 
                     }).catch(error => {
                         //console.error('Error:', error, error.stack + '\n');
